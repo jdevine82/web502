@@ -4,10 +4,10 @@ class CreateOrders< ActiveRecord::Migration
       t.column :date, :datetime
       t.column :customer_id, :integer
       t.column  :customer_order_no, :string
-
+       t.timestamps null: false
       end
     end
-    add_foreign_key :orders, :customer_id
+
   end
 
 
