@@ -1,4 +1,4 @@
-class Updatepromtotions < ActiveRecord::Migration
+class Changepromotions < ActiveRecord::Migration
   def change
       add_column :promotions, :start_date, :datetime
       add_column :promotions, :end_date, :datetime
