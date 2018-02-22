@@ -1,0 +1,32 @@
+<p id="notice"><%= notice %></p>
+  <%= image_tag @product.front_page.url(:original), class: ' image-fluid' %>
+  <div class="field">
+<br>
+    <%=   @product.name %>
+  </div>
+    <div class="field">
+   <br>
+    <%=  @product.author %>
+  </div>
+    <div class="field">
+    <br>
+    <%=   @product.title %>
+  </div>
+    <div class="field">
+   <br>
+    <%=   @product.year %>
+  </div>
+    <div class="field">
+   <br>
+    <%=   @product.publisher %>
+  </div>
+    <div class="field">
+   <br>
+    <%=  @product.description %>
+  </div>
+    <div class="field">
+   <br>
+    <%= @product.price%>
+  </div>
+<%= link_to 'Edit', edit_product_path(@product) %> |
+<%= link_to 'Back', products_path %>
