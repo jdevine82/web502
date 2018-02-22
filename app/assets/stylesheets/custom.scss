@@ -1,0 +1,19 @@
+@import "bootstrap";
+$gray-medium-light: #eaeaea;
+$gray-light: #c7c9cc;
+$gray: #9f9fa0;
+$gray-darker: #5d5d5e;
+$blue:#2e45f4;
+$blue-darker:#010842;
+$genericopacity: 0.8;
+
+body,html {
+  height: 90%;
+    background-image: url("https://s3.amazonaws.com/web501b/background.jpg");
+    background-size:auto;
+    background-attachment: fixed;
+    
+    .jumbotron {
+      opacity: $genericopacity;
+    }
+}
