@@ -1,4 +1,4 @@
-class Update < ActiveRecord::Migration
+class CreateOrders< ActiveRecord::Migration
   def change 
       add_column :orders, :date, :datetime
       add_column :orders, :customer_id, :integer
