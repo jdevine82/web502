@@ -11,37 +11,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180222101329) do
-
-  create_table "customers", force: :cascade do |t|
-    t.string   "first_name"
-    t.string   "last_name"
-    t.integer  "vip_number"
-    t.string   "phone"
-    t.string   "address"
-    t.string   "email",                  default: "", null: false
-    t.string   "encrypted_password",     default: "", null: false
-    t.string   "reset_password_token"
-    t.datetime "reset_password_sent_at"
-    t.datetime "remember_created_at"
-    t.integer  "sign_in_count",          default: 0,  null: false
-    t.datetime "current_sign_in_at"
-    t.datetime "last_sign_in_at"
-    t.string   "current_sign_in_ip"
-    t.string   "last_sign_in_ip"
-    t.datetime "created_at",                          null: false
-    t.datetime "updated_at",                          null: false
-  end
-
-  add_index "customers", ["email"], name: "index_customers_on_email", unique: true
-  add_index "customers", ["reset_password_token"], name: "index_customers_on_reset_password_token", unique: true
+ActiveRecord::Schema.define(version: 20180224061552) do
 
   create_table "orders", force: :cascade do |t|
     t.datetime "created_at",        null: false
     t.datetime "updated_at",        null: false
     t.datetime "date"
-    t.integer  "customer_id"
+    t.integer  "user_id"
     t.string   "customer_order_no"
+    t.integer  "status"
   end
 
   create_table "product_orders", force: :cascade do |t|
@@ -49,7 +27,6 @@ ActiveRecord::Schema.define(version: 20180222101329) do
     t.integer "product_id"
     t.integer "product_qty"
     t.float   "product_price"
-    t.integer "product_status", default: 0
   end
 
   create_table "product_promotions", force: :cascade do |t|
@@ -65,7 +42,6 @@ ActiveRecord::Schema.define(version: 20180222101329) do
     t.string   "publisher"
     t.string   "description"
     t.float    "price"
-    t.datetime "first_creation_date"
     t.datetime "created_at",              null: false
     t.datetime "updated_at",              null: false
     t.string   "front_page_file_name"
@@ -81,5 +57,28 @@ ActiveRecord::Schema.define(version: 20180222101329) do
     t.datetime "end_date"
     t.float    "discount_amount"
   end
+
+  create_table "users", force: :cascade do |t|
+    t.string   "email",                  default: "", null: false
+    t.string   "encrypted_password",     default: "", null: false
+    t.string   "reset_password_token"
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
+    t.integer  "sign_in_count",          default: 0,  null: false
+    t.datetime "current_sign_in_at"
+    t.datetime "last_sign_in_at"
+    t.string   "current_sign_in_ip"
+    t.string   "last_sign_in_ip"
+    t.datetime "created_at",                          null: false
+    t.datetime "updated_at",                          null: false
+    t.string   "first_name"
+    t.string   "last_name"
+    t.integer  "vip_number"
+    t.string   "phone"
+    t.string   "address"
+  end
+
+  add_index "users", ["email"], name: "index_users_on_email", unique: true
+  add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
 
 end

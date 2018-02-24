@@ -1,0 +1,28 @@
+<%= form_for(@product_order) do |f| %>
+    <% if @product_order.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@product_order.errors.count, "error") %> prohibited this order from being saved:</h2>
+
+      <ul>
+      <% @product_order.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+    <% end %>
+
+  <br>
+   
+  <div class="input-field">
+   <h2> Item : <%=Product.find(@product_order.product_id).title %> </h2>
+    <%= f.number_field :product_qty, :value=> @product_order.product_qty%>
+  </div>
+    
+  
+  <p> Line cost :$<%=@product_order.product_price.to_f*@product_order.product_qty.to_f %> </p>
+
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

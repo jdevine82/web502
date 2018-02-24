@@ -1,15 +1,18 @@
 Rails.application.routes.draw do
+  get 'static_pages/home'
+
+devise_for :users, :controllers => { registrations: 'registrations', sessions: 'users/sessions' }
 
   resources :orders
   resources :promotions
   resources :products
-  devise_for :customers, :path => 'accounts'
-  resources :customers
+  resources :product_orders
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
   # You can have the root of your site routed with "root"
-   root 'products#index'
+   root 'static_pages#home'
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

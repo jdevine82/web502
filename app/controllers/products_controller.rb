@@ -4,17 +4,29 @@ class ProductsController < ApplicationController
   # GET /products
   # GET /products.json
   def index
-    @products = Product.all
+    
+    if params[:latest].present?
+     @products=Product.where(:created_at, Date.today<<(6)..Date.today) end
+    if params[:author].present?
+     @products=Product.where(:author =>params[:author]) end
+    if params[:year].present?
+     @products=Product.where(:year =>params[:year])
+   else
+    @products=Product.all
+    end
   end
 
   # GET /products/1
   # GET /products/1.json
   def show
+    
+   @addproduct=Order.last.product_orders.build
   end
 
   # GET /products/new
   def new
     @product = Product.new
+  
   end
 
   # GET /products/1/edit

@@ -10,6 +10,7 @@ class OrdersController < ApplicationController
   # GET /orders/1
   # GET /orders/1.json
   def show
+    
   end
 
   # GET /orders/new
@@ -19,6 +20,11 @@ class OrdersController < ApplicationController
 
   # GET /orders/1/edit
   def edit
+    @shoppingcart=current_user.orders.last
+    @invoicetotal=0
+      @shoppingcart.product_orders.each do |i|
+      @invoicetotal+=i.product_price.to_f*i.product_qty.to_f
+      end
   end
 
   # POST /orders
