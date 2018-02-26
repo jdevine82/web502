@@ -15,27 +15,39 @@ class PromotionsController < ApplicationController
   # GET /promotions/new
   def new
     @promotion = Promotion.new
+    @products=Product.all
   end
 
   # GET /promotions/1/edit
   def edit
+        @products=Product.all
   end
 
   # POST /promotions
   # POST /promotions.json
   def create
-    @promotion = Promotion.new(promotion_params)
-
-    respond_to do |format|
+      @promotion = Promotion.new(promotion_params)
+    if  params[:product_ids].present? 
+    
+       @params=params[:product_ids]
+        @params.each do |value|
+           @addproduct = @promotion.product_promotions.build(:product_id => value)
+           @addproduct.save
+         end
+      respond_to do |format|
       if @promotion.save
         format.html { redirect_to @promotion, notice: 'Promotion was successfully created.' }
         format.json { render :show, status: :created, location: @promotion }
-      else
+        else
         format.html { render :new }
         format.json { render json: @promotion.errors, status: :unprocessable_entity }
+        end
       end
-    end
-  end
+  else
+  redirect_to @promotion, notice: 'You must put some products in the promotion!' 
+  end #end else
+end #end def
+  
 
   # PATCH/PUT /promotions/1
   # PATCH/PUT /promotions/1.json
@@ -69,6 +81,6 @@ class PromotionsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def promotion_params
-      params.fetch(:promotion, {})
+      params.require(:promotion).permit(:start_date, :end_date, :product_ids,:discount_amount)
     end
 end

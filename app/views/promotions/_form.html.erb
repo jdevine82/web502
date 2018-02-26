@@ -10,6 +10,48 @@
       </ul>
     </div>
   <% end %>
+  <div class="field">
+    <%= f.label :start_date %><br>
+   <%= f.text_field :start_date, class: "datepicker col-xs-12" %>
+    </div>
+    <div class="field">
+    <%= f.label :end_date %><br>
+   <%= f.text_field :end_date, class: "datepicker col-xs-12" %>
+    </div>
+    <div class="field">
+    <%= f.label :discount_amount %><br>
+     <p> % <%= f.number_field :discount_amount, value: number_to_percentage(f.object.discount_amount.to_f, delimiter: '', unit: ''), step: :any%>
+    </p>
+    </div>
+    
+    <table class='table table-hover'>
+     <thead>
+    <tr>
+      <th scope='col'>#</th>
+      <th scope="col">Title</th>
+      <th scope="col">Author</th>
+      <th scope="col">Year</th>
+      <th scope="col">Add to Promotion</th>
+    </tr>
+  </thead>
+  <% @count= 0.to_i %>
+ <% @products.each do |p| %>
+    
+  
+      <% @count=@count+1 %>
+     <tr>
+     <th scope="row"><%= @count %></th>
+     <td> <%= p.title %> </td>
+     <td> <%= p.author %> </td>
+     <td> <%= p.year %> </td>
+     <td> <%= check_box_tag "product_ids[]", p.id %></td>
+     
+  
+     </tr>
+     <%end %>
+    
+    </table>
+
 
   <div class="actions">
     <%= f.submit %>

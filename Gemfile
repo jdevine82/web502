@@ -28,6 +28,7 @@ gem 'will_paginate'
 gem 'bootstrap-will_paginate', '1.0.0'
 gem 'aws-sdk', '~> 2.6'
 gem "breadcrumbs_on_rails"
+gem 'jquery-ui-rails'
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 

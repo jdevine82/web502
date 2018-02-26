@@ -1,4 +1,4 @@
 class Promotion < ActiveRecord::Base
-    has_many :products, :through => :product_promotions
-    
+    has_many :product_promotions
+  
 end
