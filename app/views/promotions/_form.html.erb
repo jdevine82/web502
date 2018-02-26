@@ -20,7 +20,7 @@
     </div>
     <div class="field">
     <%= f.label :discount_amount %><br>
-     <p> % <%= f.number_field :discount_amount, value: number_to_percentage(f.object.discount_amount.to_f, delimiter: '', unit: ''), step: :any%>
+     <p> % <%= f.number_field :discount_amount, step: :any%>
     </p>
     </div>
     
@@ -44,7 +44,7 @@
      <td> <%= p.title %> </td>
      <td> <%= p.author %> </td>
      <td> <%= p.year %> </td>
-     <td> <%= check_box_tag "product_ids[]", p.id %></td>
+     <td> <%= check_box_tag "product_ids[]", p.id ,  if @promotion.product_promotions.where(p.id) == p.id then 'TRUE' else 'FALSE' end %></td>
      
   
      </tr>
