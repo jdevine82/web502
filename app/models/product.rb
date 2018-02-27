@@ -1,6 +1,6 @@
 class Product < ActiveRecord::Base
-
     has_many :product_promotions
+    has_many :promotions, through: :product_promotions
     has_many :product_orders
      validates :front_page,attachment_presence: true
      has_attached_file :front_page, styles: { medium: "300x300>", thumb: "100x100>" }, default_url: ""
