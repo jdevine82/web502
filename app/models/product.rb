@@ -7,3 +7,4 @@ class Product < ActiveRecord::Base
      validates_attachment_content_type :front_page, content_type: /\Aimage\/.*\z/
      
 end
+

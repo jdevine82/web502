@@ -45,7 +45,8 @@
  <td> <%=f.product_qty %></td>
 <td>  <%=f.product_price %> </td>
 <td> <%=f.product_price.to_f*f.product_qty.to_f %> </td>
-<td> <%=link_to 'modify', edit_product_order_path(f.id) %> </td>    
+<td> <%=link_to 'modify', edit_product_order_path(f.id) %> </td>  
+<td> <%=link_to 'remove', product_order_path(f.id), method: :delete %> </td>
 </tr>    
   <% end %>
   </table>

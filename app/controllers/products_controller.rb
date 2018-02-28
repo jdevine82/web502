@@ -19,7 +19,14 @@ class ProductsController < ApplicationController
   # GET /products/1
   # GET /products/1.json
   def show
-    
+ 
+  if Promotion.joins(product_promotions: [:product]).where('product_id= ? AND start_date < ? AND end_date > ?',@product,Date.today,Date.today).exists? then
+  @discountamount=Promotion.joins(product_promotions: [:product]).where('product_id= ? AND start_date < ? AND end_date > ?',@product,Date.today,Date.today).first.discount_amount
+  @productadjustedprice = @product.price-(@discountamount/100*@product.price)
+  else
+  @productadjustedprice = nil
+  end
+   
    @addproduct=Order.last.product_orders.build
   end
 

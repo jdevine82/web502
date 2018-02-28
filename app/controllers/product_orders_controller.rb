@@ -24,9 +24,20 @@ class ProductOrdersController < ApplicationController
   # POST /products
   # POST /products.json
   def create
+    @product=Product.find(product_orders_params[:product_id])
       @productprice=Product.find(product_orders_params[:product_id]).price
       @paramsvar= product_orders_params
-      @paramsvar[:product_price] =@productprice
+  
+  if Promotion.joins(product_promotions: [:product]).where('product_id= ? AND start_date < ? AND end_date > ?',@product,Date.today,Date.today).exists? then
+  @discountamount=Promotion.joins(product_promotions: [:product]).where('product_id= ? AND start_date < ? AND end_date > ?',@product,Date.today,Date.today).first.discount_amount
+  @productadjustedprice = @product.price-(@discountamount/100*@product.price)
+   @paramsvar[:product_price] =  @product.price-(@discountamount/100*@product.price)
+  
+  else
+  @productadjustedprice = nil
+  @paramsvar[:product_price] =@productprice
+  end
+    
      @addproduct =current_user.orders.last.product_orders.build(@paramsvar)
      
     if @addproduct.save
@@ -59,8 +70,9 @@ class ProductOrdersController < ApplicationController
   # DELETE /products/1.json
   def destroy
     @product_order.destroy
+    @order=session[:order]
     respond_to do |format|
-      format.html { redirect_to products_url, notice: 'Product was successfully destroyed.' }
+      format.html { redirect_to edit_order_path(@order), notice: 'Product was successfully destroyed.' }
       format.json { head :no_content }
     end
   end

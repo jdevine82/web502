@@ -23,13 +23,21 @@
     <div class="field">
    <br>
     <%=  @product.description %>
-  </div>
+ 
+     <% if not @productadjustedprice === nil %>
+    </div>
     <div class="field">
    <br>
-    <p> regular price <%= @product.price%></p> 
-    <% @saleprice= @product.price-(@product.promotions.first.discount_amount/100*@product.price) %>
-    <p> Sale Price: <%= @saleprice%> </p>
+    <p> regular price $<%= @product.price %></p> 
+    <p> Sale Price: $ <%= @productadjustedprice %> </p>
   </div>
+
+  <%else %>
+  <div class="field">
+  <br>
+  <p> price: $ <%= @product.price %> </p>
+  </div>
+  <%end%>
   
 
  <%= form_for(@addproduct) do |f| %>

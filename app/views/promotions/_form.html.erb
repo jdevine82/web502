@@ -1,9 +1,5 @@
 <div class="container">
-<% flash.each do |key, value| %>
-      <div class="<%= flash_class(key) %>" role='alert'>
-            <%= value %>
-      </div>
-<% end %>
+
 <%= form_for(@promotion) do |f| %>
   <% if @promotion.errors.any? %>
     <div id="error_explanation">

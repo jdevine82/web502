@@ -20,7 +20,9 @@ class OrdersController < ApplicationController
 
   # GET /orders/1/edit
   def edit
+    
     @shoppingcart=current_user.orders.last
+    session[:order]=@shoppingcart.id
     @invoicetotal=0
       @shoppingcart.product_orders.each do |i|
       @invoicetotal+=i.product_price.to_f*i.product_qty.to_f
