@@ -1,15 +1,22 @@
+<div class="container">
+<% flash.each do |key, value| %>
+      <div class="<%= flash_class(key) %>" role='alert'>
+            <%= value %>
+      </div>
+<% end %>
 <%= form_for(@promotion) do |f| %>
   <% if @promotion.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@promotion.errors.count, "error") %> prohibited this promotion from being saved:</h2>
 
-      <ul>
-      <% @promotion.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
+  
     </div>
   <% end %>
+   <div class="field">
+    <%= f.label :name %><br>
+     <p><%= f.text_field :name %>
+    </p>
+    </div>
   <div class="field">
     <%= f.label :start_date %><br>
    <%= f.text_field :start_date, class: "datepicker col-xs-12" %>
@@ -20,40 +27,15 @@
     </div>
     <div class="field">
     <%= f.label :discount_amount %><br>
-     <p> % <%= f.number_field :discount_amount, step: :any%>
+     <p> % <%= f.number_field :discount_amount, step: :any %>
     </p>
     </div>
+   
     
-    <table class='table table-hover'>
-     <thead>
-    <tr>
-      <th scope='col'>#</th>
-      <th scope="col">Title</th>
-      <th scope="col">Author</th>
-      <th scope="col">Year</th>
-      <th scope="col">Add to Promotion</th>
-    </tr>
-  </thead>
-  <% @count= 0.to_i %>
- <% @products.each do |p| %>
-    
-  
-      <% @count=@count+1 %>
-     <tr>
-     <th scope="row"><%= @count %></th>
-     <td> <%= p.title %> </td>
-     <td> <%= p.author %> </td>
-     <td> <%= p.year %> </td>
-     <td> <%= check_box_tag "product_ids[]", p.id ,  if @promotion.product_promotions.where(p.id) == p.id then 'TRUE' else 'FALSE' end %></td>
-     
-  
-     </tr>
-     <%end %>
-    
-    </table>
-
 
   <div class="actions">
     <%= f.submit %>
   </div>
 <% end %>
+
+

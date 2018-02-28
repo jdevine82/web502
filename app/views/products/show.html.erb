@@ -26,7 +26,9 @@
   </div>
     <div class="field">
    <br>
-    <%= @product.price%>
+    <p> regular price <%= @product.price%></p> 
+    <% @saleprice= @product.price-(@product.promotions.first.discount_amount/100*@product.price) %>
+    <p> Sale Price: <%= @saleprice%> </p>
   </div>
   
 

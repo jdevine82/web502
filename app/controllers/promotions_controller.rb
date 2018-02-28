@@ -10,42 +10,43 @@ class PromotionsController < ApplicationController
   # GET /promotions/1
   # GET /promotions/1.json
   def show
+     @products=@promotion.products
   end
 
   # GET /promotions/new
   def new
     @promotion = Promotion.new
-    @products=Product.all
+ @products=@promotion.products
+  @product_promotions=ProductPromotion.new
+  end
+  
+  def delete_promotion_product
+    @b=ProductPromotion.id.where(promotion_id: @promotion, product_id: p)
   end
 
   # GET /promotions/1/edit
   def edit
-        @products=Product.all
+        @products=@promotion.products
+         @product_promotions=ProductPromotion.new
+         session[:promotion]=@promotion.id
   end
 
   # POST /promotions
   # POST /promotions.json
   def create
+  
       @promotion = Promotion.new(promotion_params)
-    if  params[:product_ids].present? 
-    
-       @params=params[:product_ids]
-        @params.each do |value|
-           @addproduct = @promotion.product_promotions.build(:product_id => value)
-           @addproduct.save
-         end
+
       respond_to do |format|
       if @promotion.save
-        format.html { redirect_to @promotion, notice: 'Promotion was successfully created.' }
+        format.html { redirect_to edit_promotion_path(@promotion), notice: 'Promotion was successfully created.' }
         format.json { render :show, status: :created, location: @promotion }
         else
         format.html { render :new }
         format.json { render json: @promotion.errors, status: :unprocessable_entity }
         end
       end
-  else
-  redirect_to @promotion, notice: 'You must put some products in the promotion!' 
-  end #end else
+  
 end #end def
   
 
@@ -68,7 +69,7 @@ end #end def
   def destroy
     @promotion.destroy
     respond_to do |format|
-      format.html { redirect_to promotions_url, notice: 'Promotion was successfully destroyed.' }
+      format.html { redirect_to products_path, notice: 'Promotion was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
@@ -81,6 +82,6 @@ end #end def
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def promotion_params
-      params.require(:promotion).permit(:start_date, :end_date, :product_ids,:discount_amount)
+      params.require(:promotion).permit(:id,:start_date, :end_date,:discount_amount, :name)
     end
 end

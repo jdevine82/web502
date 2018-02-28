@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180224061552) do
+ActiveRecord::Schema.define(version: 20180228021824) do
 
   create_table "orders", force: :cascade do |t|
     t.datetime "created_at",        null: false
@@ -50,13 +50,18 @@ ActiveRecord::Schema.define(version: 20180224061552) do
     t.datetime "front_page_updated_at"
   end
 
+  add_index "products", ["id"], name: "index_products_on_id"
+
   create_table "promotions", force: :cascade do |t|
     t.datetime "created_at",      null: false
     t.datetime "updated_at",      null: false
     t.datetime "start_date"
     t.datetime "end_date"
     t.float    "discount_amount"
+    t.string   "name"
   end
+
+  add_index "promotions", ["id"], name: "index_promotions_on_id"
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                  default: "", null: false

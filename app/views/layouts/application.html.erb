@@ -10,7 +10,11 @@
 <body>
 <div class='container contents'>
 <%= render 'layouts/header' %>
-
+<% flash.each do |key, value| %>
+      <div class="<%= flash_class(key) %>" role='alert'>
+            <%= value %>
+      </div>
+<% end %>
 <%= yield %>
  </div> 
 </body>
