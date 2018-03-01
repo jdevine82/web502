@@ -1,17 +1,16 @@
 
 <div class="swiper-container">
   <div class="swiper-wrapper">
+  <div class="swiper-button-prev"></div>
+  <% @books.each do |b| %>
     <div class="swiper-slide">
-        <div class="swiper-button-prev"></div>
-      <img alt="Image1" src='<%=Product.first.front_page.url(:original)%>'>
-      </div>
-   
-    <div class="swiper-slide">
-      <img alt="Image2" src='<%=Product.last.front_page.url(:original)%>' >
-      </div>
-    </div>
+    <a href=<%= product_path(b) %>>
+      <img alt='<% b.title %>' src='<%=b.front_page.url(:large)%>'>
+      </div></a>
+   <% end %>
+    
+    <div class="swiper-button-next"></div>
     <div class="pagination"></div>
 
-    <div class="swiper-button-next"></div>
     </div>
  

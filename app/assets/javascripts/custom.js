@@ -22,7 +22,7 @@
         el: '.swiper-pagination',
          },
       autoplay: {
-    delay: 5000,
+    delay: 1000,
    },
    navigation: {
         nextEl: '.swiper-button-next',
