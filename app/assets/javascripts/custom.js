@@ -1,4 +1,5 @@
 
+
     $(function() {
       $('.datepicker').datepicker( { dateFormat:'dd-mm-yy' } );
     });
@@ -16,13 +17,13 @@
         depth: 100,
         modifier: 1,
         slideShadows : true,
-      },
+          },
       pagination: {
         el: '.swiper-pagination',
-      },
+         },
       autoplay: {
     delay: 5000,
-  },
+   },
    navigation: {
         nextEl: '.swiper-button-next',
         prevEl: '.swiper-button-prev',
