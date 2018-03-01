@@ -20,7 +20,7 @@ class OrdersController < ApplicationController
 
   # GET /orders/1/edit
   def edit
-    
+  
     @shoppingcart=current_user.orders.last
     session[:order]=@shoppingcart.id
     @invoicetotal=0

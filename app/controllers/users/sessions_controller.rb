@@ -6,19 +6,19 @@ class Users::SessionsController < Devise::SessionsController
   # GET /resource/sign_in
    def new
     super
-    
+      
+ 
+      
    end
 
   def create
    super
-   if (current_user.orders.count == 0) then a=current_user.orders.new 
+
+   if ((current_user.orders.count == 0) or (current_user.orders.count == nil) or  (current_user.orders.last.status != 0)) then a=Order.new
     a.status =0
-    a.user_id=current_user
+    a.user_id=current_user.id
    a.save 
     end
-  if (current_user.orders.last.status == 0) then current_user.orders.new end
- 
-  
    end
 
   # DELETE /resource/sign_out
