@@ -1,4 +1,5 @@
 class StaticPagesController < ApplicationController
+
   add_breadcrumb "home", :root_path
 
   def home
