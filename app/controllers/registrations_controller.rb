@@ -12,13 +12,16 @@ class RegistrationsController < Devise::RegistrationsController
   
    def after_sign_up_path_for(resource)
 
-     
+   
           
-       if ((current_user.orders.count == 0) or (current_user.orders.count == nil) or  (current_user.orders.status == 0)) then a=Order.new
-    a.status =0
-    a.user_id=current_user.id
-   a.save 
+       if ((current_user.orders.count == 0) or (current_user.orders.count == nil) or  (current_user.orders.status == 0)) then  
+        
+    a=Order.new
+    a.status=0
+   a.user_id=current_user.id
+    a.save 
+    
     end
-     super(resource)
+       super(resource)
    end
 end
