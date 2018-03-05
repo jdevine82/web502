@@ -1,6 +1,6 @@
 
 
-<h1>Listing Promotions</h1>
+<h1>All Promotions</h1>
 
 <table>
   <thead>
@@ -21,9 +21,9 @@
         <td><%= promotion.start_date.strftime("%Y-%m-%d") %> </td>
         <td><%= promotion.end_date.strftime("%Y-%m-%d") %> </td>
         <td><%= promotion.discount_amount %>
-        <td><%= link_to 'Show', promotion %></td>
-        <td><%= link_to 'Edit', edit_promotion_path(promotion) %></td>
-        <td><%= link_to 'Destroy', promotion, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Show', promotion, class: "btn btn-primary" %></td>
+        <td><%= link_to 'Edit', edit_promotion_path(promotion), class: "btn btn-success" %></td>
+        <td><%= link_to 'Destroy', promotion, method: :delete, class: "btn btn-warning", data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>
@@ -31,4 +31,4 @@
 
 <br>
 
-<%= link_to 'New Promotion', new_promotion_path %>
+<%= link_to 'New Promotion', new_promotion_path , class: "btn btn-primary"%>

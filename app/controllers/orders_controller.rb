@@ -21,17 +21,43 @@ class OrdersController < ApplicationController
   # GET /orders/1/edit
   def edit
   
+       
+ 
     @shoppingcart=current_user.orders.last
     session[:order]=@shoppingcart.id
     @invoicetotal=0
       @shoppingcart.product_orders.each do |i|
       @invoicetotal+=i.product_price.to_f*i.product_qty.to_f
       end
+    
   end
 
+  def checkout
+    checkout_cart=current_user.orders.last
+   checkout_cart.status=1
+   checkout_cart.save
+   @order=Order.new(status: 0, user_id: current_user.id)
+
+   @order.save 
+    
+    respond_to do |format|
+      if  checkout_cart.save
+        format.html { redirect_to products_path, notice: 'shopping cart was successfully submitted.' }
+        format.json { render :show, status: :created, location:  checkout_cart }
+      else
+        format.html { render :new }
+        format.json { render json:  checkout_cart.errors, status: :unprocessable_entity }
+      end
+    end
+    
+  end
+  
+  
+  
   # POST /orders
   # POST /orders.json
   def create
+  
     @order = Order.new(order_params)
 
     respond_to do |format|
@@ -77,6 +103,6 @@ class OrdersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def order_params
-       params.require(:order).permit(:date, :customer_id, :customer_order_no)
+       params.require(:order).permit(:date, :commit, :customer_id, :customer_order_no)
     end
 end

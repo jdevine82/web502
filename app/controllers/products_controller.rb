@@ -1,16 +1,21 @@
 class ProductsController < ApplicationController
   before_action :set_product, only: [:show, :edit, :update, :destroy]
-
+  add_breadcrumb "products", :products_path
+ 
   # GET /products
   # GET /products.json
   def index
-    
+  
+   add_breadcrumb "products", :products_path
     if params[:latest].present?
-     @products=Product.where(:created_at, Date.today<<(6)..Date.today) end
-    if params[:author].present?
-     @products=Product.where(:author =>params[:author]) end
-    if params[:year].present?
+     @products=Product.where("created_at >= :start_date AND created_at <= :end_date", {start_date: Date.today<<(6), end_date: Date.today}) 
+   
+    elsif params[:author].present?
+     @products=Product.where(:author =>params[:author]) 
+     
+    elsif params[:year].present?
      @products=Product.where(:year =>params[:year])
+    
    else
     @products=Product.all
     end
@@ -19,7 +24,7 @@ class ProductsController < ApplicationController
   # GET /products/1
   # GET /products/1.json
   def show
- 
+  add_breadcrumb "product", :product_path
   if Promotion.joins(product_promotions: [:product]).where('product_id= ? AND start_date < ? AND end_date > ?',@product,Date.today,Date.today).exists? then
   @discountamount=Promotion.joins(product_promotions: [:product]).where('product_id= ? AND start_date < ? AND end_date > ?',@product,Date.today,Date.today).first.discount_amount
   @productadjustedprice = @product.price-(@discountamount/100*@product.price)
@@ -88,6 +93,6 @@ class ProductsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def product_params
-   params.require(:product).permit(:name, :author, :title, :year, :publisher,:description, :price, :front_page)
+   params.require(:product).permit(:name,:latest, :author, :title, :year, :publisher,:description, :price, :front_page)
     end
 end

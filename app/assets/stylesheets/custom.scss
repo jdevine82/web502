@@ -1,18 +1,37 @@
 @import "bootstrap";
 @import "jquery-ui";
 
-$gray-medium-light: #eaeaea;
-$gray-light: #c7c9cc;
-$gray: #9f9fa0;
+
 
 body,html {
   height: 100%;
     background-image: url("https://s3.amazonaws.com/web502/background.jpg");
     background-size:auto;
-    background-attachment: fixed;
- 
-    
-   
+    background-attachment: fixed;  
+}
+
+body .jumbotron {
+  padding: 0.5rem 1rem;
+  margin: 0.5rem 1rem;
+  
+}
+
+.shoppingcart {
+  background-color: #f1eeee;
+}
+
+
+ a:hover {
+	color: #fff;
+	 background-color: none; 
+}
+.navbar  {
+  border-radius: 10px;
+
+}
+
+.description_class {
+  height:200px
 }
 
 .container {
@@ -27,14 +46,54 @@ body,html {
   background-color: white;
 }
 
-    .swiper-container {
+    .s1 .swiper-container  {
       width: 100%;
       padding-top: 50px;
       padding-bottom: 50px;
     }
-    .swiper-slide {
+    .s1 .swiper-slide {
       background-position: center;
       background-size: cover;
       width: 150px;
       height: 300px;
+    }
+    
+      .s2 .swiper-container  {
+       background-position: center;
+      background-size: cover;
+      width: 150px;
+      height: 300px;
+    }
+     .s2 .swiper-slide {
+      text-align: center;
+      font-size: 18px;
+   
+      width: 150px;
+      height: 300px;
+      
+     
+     
+    }
+  .s2 > .swiper-slide:nth-child(2n) {
+      width: 60%;
+    }
+    .s2  > .swiper-slide:nth-child(3n) {
+      width: 40%;
+    }
+    
+        .s3 .swiper-slide {
+      text-align: center;
+      font-size: 18px;
+   
+      width: 150px;
+      height: 300px;
+      
+     
+     
+    }
+  .s3 > .swiper-slide:nth-child(2n) {
+      width: 60%;
+    }
+    .s3  > .swiper-slide:nth-child(3n) {
+      width: 40%;
     }

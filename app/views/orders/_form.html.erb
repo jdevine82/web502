@@ -21,16 +21,14 @@
  
     <%= f.hidden_field :user_id, :value=>current_user %>
   </div>
-     <div class="field">
-    <%= f.label :customer_order_no%><br>
-    <%= f.text_field :customer_order_no %>
-  </div>
+   
    <div class="date-field">
    
     <%= hidden_field :status, :value=> 1%>
   </div>
-  <table>
+  <table class="table table-hover table-striped table-responsive shoppingcart">
   <tr>
+  <th># </th>
   <th>Product Name </th>
   <th>Product Qty </th>
   <th>Product Cost Each </th>
@@ -38,9 +36,11 @@
   
   
   </tr>
-  
+  <% count=0 %>
   <%  @order.product_orders.each do |f| %>
   <tr>
+  <% count=count+1%>
+   <th scope="row"><%= count.to_s %></th>
  <td> <%=f.product.name %> </td>
  <td> <%=f.product_qty %></td>
 <td>  <%=f.product_price %> </td>
@@ -50,9 +50,17 @@
 </tr>    
   <% end %>
   </table>
-  <h2> Total Price ex Shipping ex Tax   :$  <%= @invoicetotal %></h2>
 
-  <div class="actions">
-    <%= f.submit %>
+  <h2> Total Price ex Shipping ex Tax   :$  <%= @invoicetotal %></h2>
+  <div class="field">
+    <%= f.text_field :customer_order_no %> <b> Your Order Number </b>  <%= f.submit  "update", class: "btn btn-primary"%>
   </div>
+
+   
+ 
+  
+  <div  class="actions">
+  <%= f.submit 'checkout', formaction: checkoutorder_path(@order),class: "btn btn-success" %>
+  </div>
+  
 <% end %>

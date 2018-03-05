@@ -1,24 +1,33 @@
 <p id="notice"><%= notice %></p>
 
-<h1>Listing Orders</h1>
+<h1>Past Orders</h1>
 
-<table>
+<table class="table table-striped table-responsive table-hover">
   <thead>
     <tr>
-      <th colspan="3"></th>
+    <th>#</th>
+    <th>Order Id </th>
+    <th>Date</th>
+    <th>Status</th>
+    <th>Your order Id</th>
+    <th colspan="3"></th>
     </tr>
   </thead>
 
   <tbody>
+  <%count=0%>
     <% @orders.each do |order| %>
+    <% count=count+1%>
       <tr>
+      <th scope="row"><%=count.to_s%></th>
       <td> <%= order.id %> </td>
-      <td> <%= order.date %> </td>
+      <td> <%= order.updated_at %> </td>
+      <td> <%= if order.status.to_i ===1 then 'being packed' elsif order.status.to_i === 0 then 'in cart' elsif order.status.to_i === 2  then 'shipped' end%>
       <td> <%= order.customer_order_no %> </td>
 
-        <td><%= link_to 'Show', order %></td>
-        <td><%= link_to 'Edit', edit_order_path(order) %></td>
-        <td><%= link_to 'Destroy', order, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Show', order,class: "btn btn-primary" %></td>
+        <td><%= link_to 'Edit', edit_order_path(order),class: "btn btn-success" %></td>
+        <td><%= link_to 'Destroy', order, method: :delete,class: "btn btn-primary",data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>
@@ -26,4 +35,4 @@
 
 <br>
 
-<%= link_to 'New Order', new_order_path %>
+<%= link_to 'New Order', new_order_path, class: "btn btn-primary" %>

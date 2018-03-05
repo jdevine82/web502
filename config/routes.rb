@@ -8,6 +8,8 @@ devise_for :users, :controllers => { registrations: 'registrations', sessions: '
   resources :products
   resources :product_orders
   resources :product_promotions
+  
+  patch '/orders/checkout/:id', to: 'orders#checkout', as: 'checkoutorder'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

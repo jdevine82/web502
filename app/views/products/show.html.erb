@@ -1,48 +1,57 @@
+<div class="jumbotron">
 <p id="notice"><%= notice %></p>
+<div class="row">
+<div class="col-md-1"></div>
+<div class="col-md-3">
   <%= image_tag @product.front_page.url(:original), class: ' image-fluid' %>
+  </div>
+ <div class="col-md-8" style="word-wrap: break-word;">
   <div class="field">
-<br>
-    <%=   @product.name %>
-  </div>
-    <div class="field">
-   <br>
-    <%=  @product.author %>
-  </div>
-    <div class="field">
     <br>
-    <%=   @product.title %>
+    <h1><%=   @product.title %> </h1>
+  </div>
+   <div class="field">
+   <br>
+    <h3> Author:</h3> <%=  @product.author %>
+  </div>
+  <div class="field"><br>
+ <h3> Name: </h3> <%=@product.name %>
+  </div>
+   
+   
+    <div class="field">
+   <br>
+    <h3>Year: </h3><%=   @product.year %>
   </div>
     <div class="field">
    <br>
-    <%=   @product.year %>
+    <h3> Publisher: </h3><%=   @product.publisher %>
   </div>
     <div class="field">
    <br>
-    <%=   @product.publisher %>
-  </div>
-    <div class="field">
-   <br>
-    <%=  @product.description %>
- 
+  <h3>About: </h3>
+   <p> <%=@product.description %> </p
+   
+  
      <% if not @productadjustedprice === nil %>
-    </div>
+  
     <div class="field">
    <br>
-    <p> regular price $<%= @product.price %></p> 
-    <p> Sale Price: $ <%= @productadjustedprice %> </p>
+   <h3> Regular Price : </h3>$<%= @product.price %> 
+    <h3> Sale Price: </h3> $<%= @productadjustedprice %> 
   </div>
 
   <%else %>
   <div class="field">
   <br>
-  <p> price: $ <%= @product.price %> </p>
+   <h3>Price : </h3>$<%= @product.price %> 
   </div>
   <%end%>
   
 
- <%= form_for(@addproduct) do |f| %>
+<%if user_signed_in? then%> <%= form_for(@addproduct,html: {class: "form-inline"}) do |f| %>
   
-  
+  <div class="form-group row "  style= "border: 1px solid black;padding: 5px;">
   <div class="field">
  
     <%= f.hidden_field :product_id, :value => @product.id %>
@@ -50,13 +59,18 @@
   <div class="field">
     <%= f.hidden_field :product_id, :value => @product.id %>
   </div>
-  <div class="field">
-    <%= f.label :product_qty %><br>
-    <%= f.number_field :product_qty %>
-  </div>
-   <div class="actions">
-    <%= f.submit %>
+   <%= f.label :product_qty, "Add to cart  " %>
+    <%= f.number_field :product_qty, style: "margin-left:8px;" %>
+ 
+  
+    <%= f.submit "Add to Order",class: "btn btn-primary", style: "margin-left:8px;"%>
+ 
   </div>
   <% end %>
-<%= link_to 'Edit', edit_product_path(@product) %> |
-<%= link_to 'Back', products_path %>
+  <br>
+<%= link_to 'Edit', edit_product_path(@product), class: "btn btn-success" %> 
+<%end%>
+<%= link_to 'Back', products_path, class: "btn btn-primary" %>
+</div>
+</div>
+</div> 

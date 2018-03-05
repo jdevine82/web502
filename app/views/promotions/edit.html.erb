@@ -1,3 +1,4 @@
+<div class="jumbotron">
 <h1>Editing Promotion</h1>
 
 <%= render 'form' %>
@@ -20,7 +21,7 @@
      <td> <%= p.author %> </td>
      <td> <%= p.year %> </td>
      <%@b=ProductPromotion.where(promotion_id: @promotion, product_id: p).ids.first %>
-     <td> <%=  form_tag(product_promotion_path(:id => @b), method: :delete ) do  %> <%=submit_tag "Delete" %> <%end%></td>
+     <td> <%=  form_tag(product_promotion_path(:id => @b), method: :delete ) do  %> <%=submit_tag "Delete", class: "btn btn-warning" %> <%end%></td>
      </tr>
      <%end %>
     
@@ -29,10 +30,10 @@
 <%= form_for(@product_promotions) do |o| %>
 <%= select_tag(:product_id, options_from_collection_for_select(Product.all, :id, :title)) %>
 <%= hidden_field_tag(:promotion_id, @promotion.id) %>
-  <%= o.submit  %>
+  <%= o.submit class:"btn btn-success"  %>
   
 <% end %>
 
 
-<%= link_to 'Show', @promotion %> |
-<%= link_to 'Back', promotions_path %>
+<%= link_to 'Show', @promotion, class: "btn btn-primary" %> |
+<%= link_to 'Back', promotions_path, class: "btn btn-primary" %>
