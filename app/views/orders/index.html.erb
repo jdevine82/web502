@@ -10,7 +10,7 @@
     <th>Date</th>
     <th>Status</th>
     <th>Your order Id</th>
-    <th colspan="3"></th>
+   
     </tr>
   </thead>
 
@@ -25,9 +25,6 @@
       <td> <%= if order.status.to_i ===1 then 'being packed' elsif order.status.to_i === 0 then 'in cart' elsif order.status.to_i === 2  then 'shipped' end%>
       <td> <%= order.customer_order_no %> </td>
 
-        <td><%= link_to 'Show', order,class: "btn btn-primary" %></td>
-        <td><%= link_to 'Edit', edit_order_path(order),class: "btn btn-success" %></td>
-        <td><%= link_to 'Destroy', order, method: :delete,class: "btn btn-primary",data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>
