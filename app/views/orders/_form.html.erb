@@ -26,15 +26,14 @@
    
     <%= hidden_field :status, :value=> 1%>
   </div>
-  <table class="table table-hover table-striped table-responsive shoppingcart">
+  <table class="table table-hover table-striped table-responsive">
   <tr>
   <th># </th>
   <th>Product Name </th>
   <th>Product Qty </th>
   <th>Product Cost Each </th>
   <th>Line Total </th>
-  
-  
+  <th colspan=2></th>
   </tr>
   <% count=0 %>
   <%  @order.product_orders.each do |f| %>
