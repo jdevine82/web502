@@ -9,6 +9,12 @@
       <li class="nav-item active ">
       
         <%=link_to 'Home',  static_pages_home_path, class: "nav-link" %>
+        
+      </li>
+       <li class="nav-item  ">
+      
+        <%=link_to 'About Us',  static_pages_about_path, class: "nav-link" %>
+        
       </li>
       <% if not user_signed_in? %>
          <li class="nav-item">
