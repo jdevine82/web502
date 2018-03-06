@@ -38,15 +38,17 @@ class ProductOrdersController < ApplicationController
   @productadjustedprice = nil
   @paramsvar[:product_price] =@productprice
   end
-    
-     @addproduct =current_user.orders.last.product_orders.build(@paramsvar)
-     
+      
+     @addproduct =current_user.orders.last.product_orders.create(@paramsvar)
+
     if @addproduct.save
       
       flash[:success] = "Product Added!"
       redirect_to root_url
     else
-      render 'products#index'
+       flash[:notice] = "Product was not added :("
+       
+     redirect_to root_url
     end
 
   
