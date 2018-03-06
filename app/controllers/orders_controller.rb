@@ -34,7 +34,7 @@ class OrdersController < ApplicationController
   end
 
   def checkout
-    checkout_cart=current_user.orders.last
+    checkout_cart=@order
    checkout_cart.status=1
    checkout_cart.save
    @order=Order.new(status: 0, user_id: current_user.id)
